@@ -8,6 +8,7 @@
 library(downloader)
 library(plyr);
 library(knitr)
+
 ## Stpe 1: Download the dataset and unzip folder
 
 ## Check if directory already exists?
@@ -15,17 +16,21 @@ if(!file.exists("./projectData")){
   dir.create("./projectData")
 }
 Url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+
 ## Check if zip has already been downloaded in projectData directory?
 if(!file.exists("./projectData/project_Dataset.zip")){
   download.file(Url,destfile="./projectData/project_Dataset.zip",mode = "wb")
 }
+
 ## Check if zip has already been unzipped?
 if(!file.exists("./projectData/UCI HAR Dataset")){
   unzip(zipfile="./projectData/project_Dataset.zip",exdir="./projectData")
 }
+
 ## List all the files of UCI HAR Dataset folder
 path <- file.path("./projectData" , "UCI HAR Dataset")
 files<-list.files(path, recursive=TRUE)
+
 ## The files that will be used to load data are listed as follows:
 # test/subject_test.txt
 # test/X_test.txt
@@ -80,10 +85,12 @@ Data <- cbind(dataFeatures, dataCombine)
 ## i.e taken Names of Features with "mean()" or "std()"
 ## Extract using grep
 subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeaturesNames$V2)]
+
 ## 2. Subset the data frame Data by seleted names of Features
 selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
 Data<-subset(Data,select=selectedNames)
-## 3. Test : Check the structures of the data frame Data
+
+## 3. Test: Check the structures of the data frame Data
 ##str(Data)
 
 ## Step 5: Uses descriptive activity names to name the activities in the data set
