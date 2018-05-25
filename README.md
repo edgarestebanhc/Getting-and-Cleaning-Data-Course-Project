@@ -1,4 +1,4 @@
-# Getting and Cleaning Data - Course Project
+# Getting and Cleaning Data - Course Project - README.md
 
 __Author: Edgar Esteban Herrera Collazos__
 
